@@ -13,8 +13,8 @@ public class GeographyParser implements IParse<Geography> {
         String[] tokens = input.split(";");
         Geography geography = new Geography();
         geography.setId(Integer.parseInt(tokens[0]));
-        geography.setName(tokens[1]);
-        geography.setType(tokens[2]);
+        geography.setName(tokens[2]);
+        geography.setType(tokens[1]);
         geography.setCode(tokens[3]);
         if (!Objects.equals(tokens[4], "NULL"))
         {

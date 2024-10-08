@@ -13,4 +13,5 @@ public interface IHaveHierarchicalStructure<TItem> {
     int getId();
 
     Integer getParentId();
+
 }

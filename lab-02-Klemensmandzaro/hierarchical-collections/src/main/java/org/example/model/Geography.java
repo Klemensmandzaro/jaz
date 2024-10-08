@@ -12,7 +12,7 @@ public class Geography implements IHaveHierarchicalStructure<Geography> {
     private String code;
     private Integer parentId;
 
-    private List<Geography> children;
+    private List<Geography> children = new ArrayList<Geography>();
     private Geography parent;
     public int getId() {
         return id;
@@ -65,6 +65,8 @@ public class Geography implements IHaveHierarchicalStructure<Geography> {
 
         return children;
     }
+
+
 
     @Override
     public Geography getParent() {

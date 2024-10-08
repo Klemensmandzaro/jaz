@@ -5,6 +5,7 @@ import org.example.model.SampleGeographiesData;
 import org.example.model.abstraction.GeographyParser;
 import org.example.model.abstraction.IHaveHierarchicalStructure;
 import org.example.model.abstraction.IParse;
+import org.example.tools.abstractions.Hierarchy;
 import org.example.tools.abstractions.HierarchyBuilder;
 
 import java.util.ArrayList;
@@ -132,16 +133,16 @@ public class Main {
          * Sprawdzmy czy klasa rzeczywiście zachowuje generyczność
          */
 
-//        HierarchyBuilder<Person> personHierarchyBuilder = new HierarchyBuilder<>();
-//
-//        personHierarchyBuilder.setElements(Person.sample);
-//        personHierarchyBuilder.buildHierarchy();
-//        Person rootPerson = personHierarchyBuilder.getRootElement();
-//
-//        if(!Person.isEverythingOk()){
-//            System.out.println("Hierarchia jest chyba, źle zbudowana :(");
-//            return;
-//        }
+        HierarchyBuilder<Person> personHierarchyBuilder = new HierarchyBuilder<>();
+
+        personHierarchyBuilder.setElements(Person.sample);
+        personHierarchyBuilder.buildHierarchy();
+        Person rootPerson = personHierarchyBuilder.getRootElement();
+
+        if(!Person.isEverythingOk()){
+            System.out.println("Hierarchia jest chyba, źle zbudowana :(");
+            return;
+        }
 
         /**
          * Super!
@@ -155,28 +156,28 @@ public class Main {
          * która implementuje interfejs IHaveHierarchicalStructure<TItem>
          */
 
-//        Hierarchy<Geography> geoHierarchy = new Hierarchy<>();
-//        geoHierarchy.setRootElement(rootGeography);
-//        Geography nilphamariZila = geoHierarchy.findElementById(555);
-//
-//        if(!nilphamariZila.getName().equals("Nilphamari zila")){
-//            System.out.println("Chyba nie znalazł dobrego elementu :(");
-//            return;
-//        }
+        Hierarchy<Geography> geoHierarchy = new Hierarchy<>();
+        geoHierarchy.setRootElement(rootGeography);
+        Geography nilphamariZila = geoHierarchy.findElementById(555);
+
+        if(!nilphamariZila.getName().equals("Nilphamari zila")){
+            System.out.println("Chyba nie znalazł dobrego elementu :(");
+            return;
+        }
 
         /**
          * Sprawdźmy jeszcze generyczność
          */
 
-//        Hierarchy<Person> personHierarchy = new Hierarchy<>();
-//        personHierarchy.setRootElement(rootPerson);
-//        Person p4 = personHierarchy.findElementById(3);
-//        if(Person.p4.id!=p4.id){
-//            System.out.println("Nie znalazł osoby o id 3 :(");
-//            return;
-//        }
-//
-//        System.out.println("Udało się !! Wszystko działa :)");
+        Hierarchy<Person> personHierarchy = new Hierarchy<>();
+        personHierarchy.setRootElement(rootPerson);
+        Person p4 = personHierarchy.findElementById(3);
+        if(Person.p4.id!=p4.id){
+            System.out.println("Nie znalazł osoby o id 3 :(");
+            return;
+        }
+
+        System.out.println("Udało się !! Wszystko działa :)");
     }
 }
 
