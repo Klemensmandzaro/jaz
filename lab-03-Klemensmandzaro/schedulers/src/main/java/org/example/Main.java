@@ -77,22 +77,22 @@ public class Main {
          * kolejnego interfejsu, który będzie wykorzystywany
          * jako lambda, która może rzucić wyjątkiem (błędem)
          */
-//        IRunNotSafeAction throwAnError = ()->{ throw new Exception(); };
-//
-//        try {
-//            throwAnError.executeNotSafeAction();
-//            System.out.println("tutaj powinien wystąpić błąd, a nie wystąpił :(");
-//            return;
-//            }catch (Exception ex){}
+        IRunNotSafeAction throwAnError = ()->{ throw new Exception(); };
+
+        try {
+            throwAnError.executeNotSafeAction();
+            System.out.println("tutaj powinien wystąpić błąd, a nie wystąpił :(");
+            return;
+            }catch (Exception ex){}
 
         /**
          * wykorzystajmy metodę,
          * która co jakiś czas rzuca błedem
          * jako implementacja powyższego interfejsu
          */
-//        IRunNotSafeAction randomlyThrowsAnError = () -> randomlyThrowException();
+        IRunNotSafeAction randomlyThrowsAnError = () -> randomlyThrowException();
         /* albo inaczej: */
-//        IRunNotSafeAction randomlyThrowsAnErrorMethodReference = Main::randomlyThrowException;
+        IRunNotSafeAction randomlyThrowsAnErrorMethodReference = Main::randomlyThrowException;
 
         /**
          * Jeśli myslałeś, że poprzednie zadanie było łatwe,
@@ -123,14 +123,14 @@ public class Main {
          *  W tym zadaniu pewnie będziesz musiał napisac kilka własnych klas/ inetrfejsów pomocniczych,
          *  których nie spotkasz w tym miejscu (tzn. w ciele funkcji main, w której aktualnie się znajdujemy)
          */
-//        Scheduler scheduler = Scheduler.getInstance();
-//         scheduler
-//                .forAction(randomlyThrowsAnError)
-//                .useExecutionTimeProvider(startsNowFor5SecondsMax5TimesWithDurationOf500Millis)
-//                .onError(ex->handleException(ex))
-//                .onSingleActionCompleted(()->System.out.println("wykonano akcje z powodzeniem"))
-//                .onCompleted(()->System.out.println("Zakończyłem pracę"))
-//                .Schedule();
+        Scheduler scheduler = Scheduler.getInstance();
+         scheduler
+                .forAction(randomlyThrowsAnError)
+                .useExecutionTimeProvider(startsNowFor5SecondsMax5TimesWithDurationOf500Millis)
+                .onError(ex->handleException(ex))
+                .onSingleActionCompleted(()->System.out.println("wykonano akcje z powodzeniem"))
+                .onCompleted(()->System.out.println("Zakończyłem pracę"))
+                .schedule();
 
         /**
          * Jeżeli już tutaj się znalazłeś i samemu rozwiązałeeś powyższe zadania,
