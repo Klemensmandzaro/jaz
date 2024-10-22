@@ -130,7 +130,7 @@ public class Main {
                 .onError(ex->handleException(ex))
                 .onSingleActionCompleted(()->System.out.println("wykonano akcje z powodzeniem"))
                 .onCompleted(()->System.out.println("Zakończyłem pracę"))
-                .schedule();
+                .Schedule();
 
         /**
          * Jeżeli już tutaj się znalazłeś i samemu rozwiązałeeś powyższe zadania,
@@ -148,19 +148,19 @@ public class Main {
          *      a zadanie się jeszcze nie wykonało,
          *      to je wykonuje.
          */
-//        Runnable schedulerThread = new SchedulerThread();
-//
-//        new Thread(schedulerThread).start();
+        Runnable schedulerThread = new SchedulerThread();
+
+        new Thread(schedulerThread).start();
 
         /**
          * na zakończenie sprawdźmy co się stanie,
          * jeśli 'zbuduję' jeszcze jedno zadanie
          * i dodam je do Schedulera
          */
-//        scheduler.forAction(()->System.out.println("chyba zaczynam to rozumieć"))
-//                .useExecutionTimeProvider(Chron.builder().setMaxExecutionTimes(1).buildNextTimeExecutionProvider())
-//                .onCompleted(()->System.out.println("Nie wierzę... działa!"))
-//                .Schedule();
+        scheduler.forAction(()->System.out.println("chyba zaczynam to rozumieć"))
+                .useExecutionTimeProvider(Chron.builder().setMaxExecutionTimes(1).buildNextTimeExecutionProvider())
+                .onCompleted(()->System.out.println("Nie wierzę... działa!"))
+                .Schedule();
 
         /**
          * to jest tylko po to aby main sam nie kończyl się wykonywać.

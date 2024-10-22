@@ -2,6 +2,8 @@ package org.example;
 
 public class Job implements IWork{
     public Job(IRunNotSafeAction action, IScheduleWork scheduler) {
+        this.action = action;
+        this.scheduler = scheduler;
     }
 
     private IRunNotSafeAction action;
@@ -13,31 +15,45 @@ public class Job implements IWork{
 
     @Override
     public IWork useExecutionTimeProvider(IProvideNextExecutionTime timeProvider) {
-        return null/*()->timeProvider.provideNextExecutionTime()*/;
+        this.nextTimeProvider = timeProvider;
+        return this;
     }
 
     @Override
     public IWork onError(IHandleErrors errorHandler) {
-        return null;
+        this.handleExeptions = errorHandler;
+        return this;
     }
 
     @Override
     public IWork onSingleActionCompleted(IComplete onSingleActionCompleted) {
-        return null;
+        this.singleActionCompleted = onSingleActionCompleted;
+        return this;
     }
 
     @Override
     public IWork onCompleted(IComplete onCompleted) {
-        return null;
+        completed = onCompleted;
+        return this;
     }
 
     @Override
-    public void schedule() {
-        this.scheduler.addJob(this);
+    public void Schedule() {
+        scheduler.addJob(this);
     }
 
     @Override
     public void execute() {
+        try {
+            action.executeNotSafeAction();
+            singleActionCompleted.complete();
+            if (nextTimeProvider.provideNextExecutionTime() == null)
+            {
+                completed.complete();
+            }
+        } catch (Exception e) {
+            handleExeptions.handle(e);
+        }
 
     }
 

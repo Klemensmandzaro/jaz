@@ -1,25 +1,26 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Scheduler implements IScheduleWork{
     private static Scheduler instance;
     private Scheduler(){}
-    List<IWork> jobs;
+    List<IWork> jobs = new ArrayList<>();
 
     @Override
     public IWork forAction(IRunNotSafeAction action) {
-        return action.executeNotSafeAction();
+        return new Job(action, instance);
     }
 
     @Override
     public List<IWork> getJobs() {
-        return List.of();
+        return jobs;
     }
 
     @Override
     public void addJob(IWork job) {
-
+        jobs.add(job);
     }
 
     static{

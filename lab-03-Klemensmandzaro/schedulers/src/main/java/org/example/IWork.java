@@ -5,6 +5,6 @@ public interface IWork {
     IWork onError(IHandleErrors errorHandler);
     IWork onSingleActionCompleted(IComplete onSingleActionCompleted);
     IWork onCompleted(IComplete onCompleted);
-    void schedule();
+    void Schedule();
     void execute();
 }

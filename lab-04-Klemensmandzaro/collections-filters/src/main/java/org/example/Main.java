@@ -7,6 +7,8 @@ import org.example.queries.QueryProcessor;
 import org.example.queries.calculations.GeneralCalculator;
 import org.example.queries.calculations.ICalculate;
 import org.example.queries.filters.*;
+import org.example.queries.paging.ICutToPage;
+import org.example.queries.paging.PageCutter;
 import org.example.queries.results.Results;
 import org.example.queries.search.Funcs;
 import org.example.queries.search.FunctionsParameters;
@@ -142,16 +144,16 @@ public class Main {
          * W wyniku ma zwrócić liczbę double która jest wynikiem obliczeń
          */
 
-//        double sumOfIncomes = incomeCalculator
-//                .calculate(new FunctionsParameters("income", Funcs.SUM), sampleData);
-//        ICalculate ageCalculator = new GeneralCalculator("age", p-> p.getAge());
+        double sumOfIncomes = incomeCalculator
+                .calculate(new FunctionsParameters("income", Funcs.SUM), sampleData);
+        ICalculate ageCalculator = new GeneralCalculator("age", p-> p.getAge());
 
         /**
          * dodajmy nasze kalkulatory, do obiektu klasy QueryProcessor
          */
 
-//        queryProcessor.addCalculation(incomeCalculator)
-//                .addCalculation(ageCalculator);
+        queryProcessor.addCalculator(incomeCalculator)
+                .addCalculator(ageCalculator);
 
         /**
          * Ostatnim krokiem do zakońćzenia zadania jest
@@ -160,15 +162,15 @@ public class Main {
          * będzie "kroiła" strumień osób do wcześniej zadeklarowanej strony wyników
          */
 
-//        ICutToPage pageCutter = new PageCutter();
-//
-//        sampleData = pageCutter.cut(new Page(3,2), sampleData);
+        ICutToPage pageCutter = new PageCutter();
+
+        sampleData = pageCutter.cut(new Page(3,2), sampleData);
 
         /**
          * dodajmy też ten obiekt do QueryProcessora
          */
 
-//        queryProcessor.addPageCutter(pageCutter);
+        queryProcessor.addPageCutter(pageCutter);
 
         /**
          * I teraz wisienka na torcie,
@@ -178,14 +180,14 @@ public class Main {
          * oraz zwróćmy rządaną stronę wyników
          */
 
-//        Results results = queryProcessor.GetResults(sampleSearchParams(), PeopleSample.Data);
-//
-//        if(!resultsAreGood(results)){
-//            System.out.println("filtrowanie nie działa prawidłowo :(");
-//            return;
-//        }
-//
-//        System.out.println("wygląda akceptowalnie.");
+        Results results = queryProcessor.GetResults(sampleSearchParams(), PeopleSample.Data);
+
+        if(!resultsAreGood(results)){
+            System.out.println("filtrowanie nie działa prawidłowo :(");
+            return;
+        }
+
+        System.out.println("wygląda akceptowalnie.");
 
     }
 

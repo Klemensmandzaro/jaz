@@ -8,7 +8,7 @@ public class Chron {
     private LocalDateTime endTime;
     private int maxExecutionTimes=-1;
     private Duration intervalDuration = Duration.ofSeconds(1);
-    private int counter;
+    private int counter=0;
 
     public static Chron builder() {
 
