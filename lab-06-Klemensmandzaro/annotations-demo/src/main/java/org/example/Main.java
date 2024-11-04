@@ -4,6 +4,7 @@ package org.example;
 import org.example.rules.ICheckValidationRule;
 import org.example.rules.NotNullValidationRule;
 import org.example.rules.RangeValidationRule;
+import org.example.rules.RegexValidationRule;
 import org.example.validation.ValidationResult;
 import org.example.validation.Validator;
 
@@ -101,25 +102,25 @@ public class Main {
         /**
          * obiekt nie jest prawidłowy
          */
-//        if(validationResult.isValid()) throw new Exception("Obiekt posiada pola które są poza zakresem");
+        if(validationResult.isValid()) throw new Exception("Obiekt posiada pola które są poza zakresem");
 
         /**
          * nieprawidłowe pola to name i email
          */
-//        var notValidFieldNames = validationResult.getNotValidFields().keySet();
-//        if(notValidFieldNames.size()!=1 || !notValidFieldNames.contains("number"))
-//            throw new Exception("Pole które jest poza zakresem to number - walidator powinien to wychwycić");
+        var notValidFieldNames = validationResult.getNotValidFields().keySet();
+        if(notValidFieldNames.size()!=1 || !notValidFieldNames.contains("number"))
+            throw new Exception("Pole które jest poza zakresem to number - walidator powinien to wychwycić");
 
         /**
          * wiadomości o błedzie
          */
-//        var validationMessagesForNumber = validationResult.getNotValidFields().get("number")
-//                .stream()
-//                .findFirst()
-//                .orElse(null);
-//
-//        if(!validationMessagesForNumber.equalsIgnoreCase("number is out of range [%d,%d]" .formatted(0, 10)))
-//            throw new Exception("złe wiadomości o błędzie");
+        var validationMessagesForNumber = validationResult.getNotValidFields().get("number")
+                .stream()
+                .findFirst()
+                .orElse(null);
+
+        if(!validationMessagesForNumber.equalsIgnoreCase("number is out of range [%d,%d]" .formatted(0, 10)))
+            throw new Exception("złe wiadomości o błędzie");
 
     }
 
@@ -133,31 +134,31 @@ public class Main {
          * Dodaj drugą implemenatcję interfejsu ICheckValidationRule dla adnotacji Regex
          *
          */
-//        ICheckValidationRule regexValidationRule = new RegexValidationRule();
-//        regexValidationRule.validate(validationResult);
+        ICheckValidationRule regexValidationRule = new RegexValidationRule();
+        regexValidationRule.validate(validationResult);
 
         /**
          * obiekt nie jest prawidłowy
          */
-//        if(validationResult.isValid()) throw new Exception("Obiekt posiada pola które jest nie poprawnego formatu regex");
+        if(validationResult.isValid()) throw new Exception("Obiekt posiada pola które jest nie poprawnego formatu regex");
 
         /**
          * nieprawidłowe pola to name i email
          */
-//        var notValidFieldNames = validationResult.getNotValidFields().keySet();
-//        if(notValidFieldNames.size()!=1 || !notValidFieldNames.contains("email"))
-//            throw new Exception("pole email ma źle wpisany email - walidator powinien to wychwycić");
+        var notValidFieldNames = validationResult.getNotValidFields().keySet();
+        if(notValidFieldNames.size()!=1 || !notValidFieldNames.contains("email"))
+            throw new Exception("pole email ma źle wpisany email - walidator powinien to wychwycić");
 
         /**
          * wiadomości o błedzie
          */
-//        var validationMessagesForNumber = validationResult.getNotValidFields().get("email")
-//                .stream()
-//                .findFirst()
-//                .orElse(null);
-//
-//        if(!validationMessagesForNumber.equalsIgnoreCase("email should be in correct format"))
-//            throw new Exception("złe wiadomości o błędzie");
+        var validationMessagesForNumber = validationResult.getNotValidFields().get("email")
+                .stream()
+                .findFirst()
+                .orElse(null);
+
+        if(!validationMessagesForNumber.equalsIgnoreCase("email should be in correct format"))
+            throw new Exception("złe wiadomości o błędzie");
 
     }
 
@@ -169,9 +170,9 @@ public class Main {
         /**
          * dodaj reguły walidacji do walidatora
          */
-//        validator.addRule(new NotNullValidationRule())
-//                .addRule(new RangeValidationRule())
-//                .addRule(new RegexValidationRule());
+        validator.addRule(new NotNullValidationRule())
+                .addRule(new RangeValidationRule())
+                .addRule(new RegexValidationRule());
 
         /**
          * Zaimplementuj metodę validate w klasie Validator,
@@ -180,11 +181,11 @@ public class Main {
          * w którym sprawdzimy czy obiekt jest poprawny, srawdzimy jakie pola są niepoprawne
          * oraz wiadomości o błędach walidacji
          */
-//        ValidationResult<SampleObject> result = validator.validate(sampleObject);
-//
-//        var resultNames = result.getNotValidFields().keySet();
-//        if(resultNames.size()!=3)
-//            throw new Exception("3 pola w klasie są złej wartości - walidator powinien to wychwycić");
+        ValidationResult<SampleObject> result = validator.validate(sampleObject);
+
+        var resultNames = result.getNotValidFields().keySet();
+        if(resultNames.size()!=3)
+            throw new Exception("3 pola w klasie są złej wartości - walidator powinien to wychwycić");
 
     }
 
