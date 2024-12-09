@@ -27,6 +27,16 @@ public record MovieDto(
         
 ) {
 
+
+    public List<CompanySummaryDto> getProductionCompanies() {
+        return productionCompanies;
+    }
+
+
+    public List<Dictionaries.CountryDto> getProductionCountries() {
+        return productionCountries;
+    }
+
     public record CompanySummaryDto(int id,
                                     @JsonProperty("logo_path") String logoPath,
                                     String name,

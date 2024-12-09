@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Configuration
-public class MoviesClientConfig {
+public class MoviesClientConfig{
 
 
     @Bean
@@ -21,4 +22,6 @@ public class MoviesClientConfig {
     public MoviesClient moviesClient(IMoviesClientUriBuilderProvider uriBuilderProvider) {
         return new MoviesClient(uriBuilderProvider);
     }
+
+
 }

@@ -10,5 +10,13 @@ public record PagedResultDto(
         @JsonProperty("total_pages") int totalPages,
         @JsonProperty("total_results") int totalResults) {
 
-    public record MovieSummaryDto(long id, String title){}
+    public List<MovieSummaryDto> getMovies() {
+        return movies;
+    }
+
+    public record MovieSummaryDto(long id, String title){
+        public long getId() {
+            return id;
+        }
+    }
 }
