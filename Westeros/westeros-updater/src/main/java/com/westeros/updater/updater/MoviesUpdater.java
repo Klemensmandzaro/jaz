@@ -18,6 +18,7 @@ public class MoviesUpdater implements IUpdateMovies{
 
     @Override
     public void updateByDateRange(LocalDate from, LocalDate to) {
+        moviesClient.getByDateRange(from, to);
 
     }
 }
