@@ -1,0 +1,1 @@
+docker run -d --name mariadb-container -e MARIADB_ROOT_PASSWORD=123 -e MARIADB_DATABASE=mojaBaza -e MARIADB_USER=userTest -e MARIADB_PASSWORD=123 -p 3306:3306 mariadb
