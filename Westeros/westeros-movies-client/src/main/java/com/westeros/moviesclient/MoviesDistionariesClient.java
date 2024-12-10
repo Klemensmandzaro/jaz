@@ -8,6 +8,8 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+
 @Component
 public class MoviesDistionariesClient implements IMoviesDictionariesClient {
     IMoviesClientSettings settings;
@@ -44,14 +46,10 @@ public class MoviesDistionariesClient implements IMoviesDictionariesClient {
     @Override
     public List<Dictionaries.GenreDto> getGenres() {
         String url = settings.getUrlBuilder()
-                .pathSegment("genre")
-                .pathSegment("movie")
-                .pathSegment("list")
+                .pathSegment("genre", "movie", "list")
                 .build()
                 .toUriString();
-        ResponseEntity<Dictionaries.GenreDto[]> response =
-                restClient.getForEntity(url, Dictionaries.GenreDto[].class);
-
-        return Arrays.asList(response.getBody());
+        return restClient.getForObject(url, GenresListDto.class).getGenres();
     }
+
 }

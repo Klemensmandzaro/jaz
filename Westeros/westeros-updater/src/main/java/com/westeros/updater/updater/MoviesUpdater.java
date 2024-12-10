@@ -10,6 +10,7 @@ import com.westeros.moviesclient.contract.Dictionaries;
 import com.westeros.moviesclient.contract.MovieDto;
 import com.westeros.moviesclient.contract.PagedResultDto;
 import org.springframework.beans.BeanUtils;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,27 +30,35 @@ public class MoviesUpdater implements IUpdateMovies{
 
     @Override
     public void updateByDateRange(LocalDate from, LocalDate to) {
+        List<Dictionaries.LanguageDto> languages = moviesDictionariesClient.getLanguages();
+        for (Dictionaries.LanguageDto language : languages) {
+            Language temporaryLanguage = new Language();
+            temporaryLanguage.setEnglishName(language.englishName());
+            temporaryLanguage.setName(language.name());
+            temporaryLanguage.setId(languages.indexOf(language)+1);
+            dbCatalog.getLanguages().save(temporaryLanguage);
+        }
+
         List<Dictionaries.CountryDto> countries = moviesDictionariesClient.getCountries();
         for (Dictionaries.CountryDto country : countries) {
             Country temporaryCountry = new Country();
-            BeanUtils.copyProperties(country, temporaryCountry);
+            temporaryCountry.setName(country.englishName());
+            temporaryCountry.setId(countries.indexOf(country)+1);
             dbCatalog.getCountries().save(temporaryCountry);
         }
 
         List<Dictionaries.GenreDto> genres = moviesDictionariesClient.getGenres();
         for (Dictionaries.GenreDto genre : genres) {
             Genre temporaryGenre = new Genre();
-            BeanUtils.copyProperties(genre, temporaryGenre);
+            temporaryGenre.setName(genre.name());
+            temporaryGenre.setId(genres.indexOf(genre)+1);
+            temporaryGenre.setSourceId(genre.id());
+            
             dbCatalog.getGenres().save(temporaryGenre);
         }
 
 
-        List<Dictionaries.LanguageDto> languages = moviesDictionariesClient.getLanguages();
-        for (Dictionaries.LanguageDto language : languages) {
-            Language temporaryLanguage = new Language();
-            BeanUtils.copyProperties(language, temporaryLanguage);
-            dbCatalog.getLanguages().save(temporaryLanguage);
-        }
+
 
         PagedResultDto response = moviesClient.getByDateRange(from, to);
         for (PagedResultDto.MovieSummaryDto summaryDto : response.getMovies())
@@ -67,4 +76,6 @@ public class MoviesUpdater implements IUpdateMovies{
         }
 
     }
+
+
 }
